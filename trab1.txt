@@ -1,0 +1,112 @@
+
+
+1)
+
+
+A altura será dividida em raiz de n intervalos, aonde cada intervalo possui raiz de n degraus. O primeiro frasco será jogado de raiz de n em raiz de n degraus. Quando o frasco quebrar, jogaremos o segundo frasco a partir do início desse intervalo de degrau em degrau até que ele quebre.
+
+Degrau_2_frascos(x,n)
+
+
+	raiz_n = sqrt(n);
+
+
+	for i = 0; i < n; i+=raiz_n
+
+		if i >= x
+
+			for j=i-raiz_n; j < i; j++
+
+				if j == x
+
+					return j;
+
+
+
+
+Quando o primeiro frasco quebrar teremos um intervalo de tamanho raiz de n que com certeza contém a altura em que o frasco quebra, visto que se o frasco não quebrou no degrau anterior ao início do intervalo, ele também não quebra em nenhum dos degraus abaixo dele. Assim, ao percorrermos o intervalo de um em um, encontraremos a altura x.
+
+
+
+No pior dos casos, o frasco quebra no último degrau, portanto, o primeiro frasco será jogado de todos os intervalos (raiz de n vezes). Como ele quebrou no último degrau, será conferido se ele quebra em algum degrau pertencente ao último intervalo. Dessa maneira, o segundo frasco será jogado em cada degrau do intervalo (raiz de n vezes), até finalmente quebrar no último degrau. Sendo assim, foi jogado 2*raiz de n. 
+
+	O(2 raiz de n) = O(raiz de n)
+
+
+
+2)
+
+Tendo 3 frascos:
+
+O primeiro frasco será jogado em intervalos de n^2/3 até quebrar. O segundo frasco será jogado em intervalos de n^1/3, no intervalo de n^2/3 encontrado. O terceiro frasco será jogado de degrau em degrau no intervalo de n^1/3 encontrado. 
+
+
+Tendo 4 frascos:
+
+O primeiro frasco será jogado em intervalos de n^3/4 até quebrar. O segundo frasco será jogado em intervalos de n^2/4, no intervalo de n^3/4 encontrado. O terceiro frasco será jogado em intervalos de n^1/4, no intervalo de n^2/4 encontrado. O quarto frasco será jogado de degrau em degrau no intervalo de n^1/4 encontrado. 
+
+
+Tendo k frascos:
+ A altura (raiz_kesima^k degraus) é dividida em raiz_kesima intervalos de tamanho raiz_kesima ^ k-1. Jogamos o primeiro frasco em intervalos de raiz_kesima ^ k-1 degraus. Quando o frasco quebrar, o último intervalo (raiz_kesima ^ k-1 degraus) será dividido em raiz_kesima intervalos de tamanho raiz_kesima ^ k-2 degraus e o segundo frasco será jogado em intervalos de raiz_kesima ^ k-2 degraus. Isso ocorrerá sucessivamente para todos os k frascos. No frasco k teremos um intervalo de tamanho raiz_kesima^k-(k-1), que é igual a raiz_kesima. O frasco será jogado em intervalos de raiz_kesima^k-k, ou seja, de degrau em degrau, até quebrar.
+
+
+Degrau_k_frascos(x,n,k)
+
+
+	raiz_kesima = raiz(n,k)
+	inicio = 0;
+	fim = n;
+	incremento = pow(raiz_kesima,k-1)
+
+	for i =	0; i < k; i++
+
+		for(j = inicio; j < fim; j+= incremento)
+			
+			if j >= x
+				if incremento == 1
+					return j;
+				inicio = j - incremento ;
+				fim = j;
+				incremento = incremento/raiz_kesima;
+				break;
+
+
+
+
+Segue a premissa do primeiro, aonde sempre se tem certeza do intervalo em que ocorre a quebra, porém com mais frascos para serem utilizados. Portanto, podemos inicialmente dividir a altura em intervalos maiores com mais subdivisões, assim postergando a procura de um em um, que será feita em um intervalo menor.
+
+Para cada frasco estamos realizando no máximo raiz_kesima testes, visto que para o frasco i temos um espaço de raiz_kesima^k-(i-1) degraus e o jogaremos em intervalos de raiz_kesima^k-i degraus. Como temos k frascos, isso será realizado k vezes. Assim, o número total de quedas será k * raiz_kesima.
+
+O(k*raiz_kesima)
+
+Se k, é um número fixo, a complexidade será O(raiz_kesima), como provado anteriormente.
+
+
+
+3)
+
+A menor complexidade assintótica possível é de O(log n).
+
+O algoritmo realiza uma busca binária ao longo da escada, jogando um frasco a cada comparação, se o frasco quebra, busca-se na metade inferior, do contrário busca-se na metade superior. Quando o intervalo é de 1 degrau, podemos garantir que encontramos a altura correta.
+
+
+
+Degrau_logn_frascos(x,n)
+					
+
+	busca_binaria(x,n)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
