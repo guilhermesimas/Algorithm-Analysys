@@ -1,33 +1,172 @@
 2.1
 
+Os objetos são ordenados por seu valor por peso com merge sort. São então adicionados a mochila de um em um começando pelo com maior valor por peso, até a capacidade ser atingida.
+
+struct objeto{
+	int valor;
+	int peso;
+	float densidade;
+	int indice;
+}
+
 mochila_frac1 (w,v,n,W)
 
 	for i=0; i<n; i++
 
-		densidade[i] = v[i]/w[i]; //cast para float
-		indices[i]=i;
+		objetos[i] = cria_objeto(v[i],w[i],i);
+		objetos_selecionados[i] = 0;
 
-	mergesort(densidade,indices,n); //refletir ordenacao em indices
+	mergesort_densidade(objetos,n);
 
 	sum_peso=0;
 	sum_valor=0;
 
-	zera_vetor(objetos,n);
-
 	for j=n-1; j>=0; j--
 
 		if sum_peso == W
-			return objetos;
+			return objetos_selecionados;
 
-		if w[indices[j]] + sum_peso < W
+		indice = objetos[j]->indice;
+		peso =  objetos[i]->peso;
 
-			objetos[indice[j]] = w[indices[j]];
-			sum_peso+=w[indices[j]];
-
+		if peso + sum_peso < W
+			objetos_selecionados[indice] = peso;
+			sum_peso+=peso;
 		else
-			objetos[indice[j]] = W-sum_peso;
+			objetos_selecionados[indice] = W-sum_peso;
 
-	return objetos;
+	return objetos_selecionados;
 
 
 
+Com os elementos ornados por valor por peso, podemos facilmente sempre escolher quais resultarão em um maior valor na mochila.
+
+Inicializar e percorrer os vetores é realizado em O(n). A ordenação com mergesort é realizada em O(n log n). 
+
+O(c*n + n log n) = O(n log n)
+
+=======================================================================
+
+
+2.2)
+
+Encontra-se a mediana do valor por peso e particiona-se o vetor.
+- Se a metade de maior valor cabe na mochila, todos os objetos são colocados na mochila e realiza-se o algoritmo na metade de menos valor. 
+- Se a metade de maior valor não cabe na mochila, realiza-se o algoritmo na metade de maior valor.
+- Se a metade de maior valor possui apenas um objeto, coloca-se a fração dele que cabe na mochila.
+
+struct objeto{
+	int valor;
+	int peso;
+	float densidade;
+	int indice;
+}
+
+mochila_frac2(w,v,n,W)
+
+	for i=0; i<n; i++
+
+		objetos[i] = cria_objeto(v[i],w[i],i);
+		objetos_selecionados[i] = 0
+
+	mochila_frac2_rec(objetos, W, 0, n, objetos_selecionados);
+
+	return objetos_selecionados
+
+
+
+mochila_frac2_rec(objetos,W,ini,fim, objetos_selecionados)
+
+	if ini > fim
+		return
+	if ini == fim
+		indice = objetos[ini]->indice;
+		objetos_selecionados[indice] = W;
+		return
+
+	meio = ini+fim/2
+
+	k = kesima_densidade(objetos, meio);
+	part_inv_densidade(objetos,k);
+	soma = somar_peso(objetos,ini,meio);
+
+	if soma > W
+		mochila_frac2_rec(objetos,W,ini, meio, objetos_selecionados);
+	else
+		for i=0; i<meio; i++
+			indice = objetos[i]->indice;
+			peso = objetos[i]->peso;
+			objetos_selecionados[indice] = peso;
+		mochila_frac2_rec(objetos,W - soma,meio,fim, objetos_selecionados);
+
+
+Com o particionamento dos objetos pela mediana do valor por peso, asseguramos que sempre que uma metade é colocada na mochila, esta é a metade de maior valor.
+
+Achar a mediana, particionar e somar são realizados em O(n).
+Assim, temos a seguinte relação de recorrênciaÇ
+
+f(n) { c, n = 1
+	 { f(n/2) + c'n, n>1
+
+Pelo Teorema Mestre: 
+	a = 1
+	b = 2
+	k = 1
+	a < b^k
+
+	O(n^k) = O(n)
+
+
+=======================================================================
+
+2.3)
+struct objeto{
+	int valor;
+	int peso;
+	float densidade;
+	int indice;
+}
+
+mochila_frac3(w,v,n,W)
+
+	for i=0; i<n; i++
+
+		objetos[i] = cria_objeto(v[i],w[i],i);
+		objetos_selecionados[i] = 0
+
+	mochila_frac3_rec(objetos, W, 0, n, objetos_selecionados);
+
+	return objetos_selecionados
+
+
+
+mochila_frac3_rec(objetos,W,ini,fim, objetos_selecionados)
+
+	if ini > fim
+		return
+	if ini == fim
+		indice = objetos[ini]->indice;
+		objetos_selecionados[indice] = W;
+		return
+
+	meio = ini+fim/2
+
+
+	valor_pivot = media_densidade(objetos, ini, fim)
+	part_inv_densidade_valor(objetos,valor_pivot);
+	soma = somar_peso(objetos,ini,meio);
+
+	if soma > W
+		mochila_frac2_rec(objetos,W,ini, meio, objetos_selecionados);
+	else
+		for i=0; i<meio; i++
+			indice = objetos[i]->indice;
+			peso = objetos[i]->peso;
+			objetos_selecionados[indice] = peso;
+		mochila_frac2_rec(objetos,W - soma,meio,fim, objetos_selecionados);
+
+
+
+Agora podemos ter um caso de particionamento desbalanceado, onde sempre um lado tem 1 elemento e o outro tem n-1 elementos. Se todos elementos menos uma fração do último cabem na mochila, todos serão percorridos. Assim, teremos intâncias de n-1, n-2, ... 1, elementos. Portanto a soma de todas as iterações é igual a n-1(n-2)/2.
+
+O(n-1(n-2)/2) = O(n^2)
