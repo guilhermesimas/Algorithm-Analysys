@@ -1,0 +1,33 @@
+2.1
+
+mochila_frac1 (w,v,n,W)
+
+	for i=0; i<n; i++
+
+		densidade[i] = v[i]/w[i]; //cast para float
+		indices[i]=i;
+
+	mergesort(densidade,indices,n); //refletir ordenacao em indices
+
+	sum_peso=0;
+	sum_valor=0;
+
+	zera_vetor(objetos,n);
+
+	for j=n-1; j>=0; j--
+
+		if sum_peso == W
+			return objetos;
+
+		if w[indices[j]] + sum_peso < W
+
+			objetos[indice[j]] = w[indices[j]];
+			sum_peso+=w[indices[j]];
+
+		else
+			objetos[indice[j]] = W-sum_peso;
+
+	return objetos;
+
+
+
