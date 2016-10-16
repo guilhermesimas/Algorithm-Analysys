@@ -137,8 +137,262 @@ $Degrau\_logn\_frascos(x,n)$\\
 					
 
 	\hspace{1cm}$busca\_binaria(x,n)$
+	
+	
+	
+	\section*{2. Problema da Mochila Fracionária (pode-se colocar parte de um objeto na mochila)}
+	
+	\vspace{1cm}
+	
+		\subsection*{1.a)}
+		
+		\vspace{0.5cm}
+	
+	\tab Os objetos são ordenados por seu valor por peso com merge sort. São então adicionados a mochila de um em um começando pelo com maior valor por peso, até a capacidade ser atingida.\\ \\
+	
+	\textbf{Pseudo Código: }\\
+	
+	$struct$ $objeto${\\
+	
+	\hspace{1cm}$int$ $valor;$\\
+	
+	\hspace{1cm}$int$ $peso;$\\
+	
+	\hspace{1cm}$float$ $densidade;$\\
+	
+	\hspace{1cm}$int$ $indice;$\\
+	
+	}
+
+	$mochila\_frac1 (w,v,n,W)$\\
+
+	\hspace{1cm}$for$ $i=0;$ $i<n;$ $i++$\\
+
+	\hspace{2cm}$objetos[i] = cria\_objeto(v[i],w[i],i);$\\
+	
+	\hspace{2cm}$objetos\_selecionados[i] = 0;$\\
+
+	\hspace{1cm}$mergesort\_densidade(objetos,n);$\\
+
+	\hspace{1cm}$sum\_peso=0;$\\
+
+	\hspace{1cm}$for$ $j=n-1;$ $j>=0;$ $j--$\\
+
+	\hspace{2cm}$if$ $sum\_peso == W$\\
+	
+	\hspace{3cm}$return$ $objetos\_selecionados;$\\
+	
+	\hspace{2cm}$indice = objetos[j]->indice;$\\
+	
+	\hspace{2cm}$peso =  objetos[i]->peso;$\\
+
+	\hspace{2cm}$if$ $peso + sum\_peso < W$\\
+	
+	\hspace{3cm}$objetos\_selecionados[indice] = peso;$\\
+	
+	\hspace{3cm}$sum\_peso+=peso;$\\
+	
+	\hspace{2cm}$else$\\
+	
+	\hspace{3cm}$objetos\_selecionados[indice] = W-sum\_peso;$\\
+	
+	\hspace{3cm}$sum\_peso+=W-sum\_peso;$\\
+	
+	\hspace{1cm}$return$ $objetos\_selecionados;$\\
+	
+	
+	Com os elementos ornados por valor por peso, podemos facilmente sempre escolher quais resultarão em um maior valor na mochila.\\
+	
+	Inicializar e percorrer os vetores é realizado em $O(n)$. A ordenação com mergesort é realizada em $O(n$ $log n)$.\\
+	
+	\begin{center}
+		O(c*n + n log n) = O(n log n)
+\end{center}	 
+	
+	
+	\subsection*{1.b)}
+	
+	\tab Encontra-se a mediana do valor por peso e particiona-se o vetor.\\
+	
+	\begin{itemize}
+		\item Se a metade de maior valor cabe na mochila, todos os objetos são colocados na mochila e realiza-se o algoritmo na metade de menos valor. 
+		
+		\item Se a metade de maior valor não cabe na mochila, realiza-se o algoritmo na metade de maior valor.
+		
+		\item Se a metade de maior valor possui apenas um objeto, coloca-se a fração dele que cabe na mochila.
+	\end{itemize}
+	
+	
+	\textbf{Pseudo Código: }\\
+	
+	$struct$ $objeto${\\
+	
+	\hspace{1cm}$int$ $valor;$\\
+	
+	\hspace{1cm}$int$ $peso;$\\
+	
+	\hspace{1cm}$float$ $densidade;$\\
+	
+	\hspace{1cm}$int$ $indice;$\\
+	
+	}
+	
+	
+	$mochila\_frac2 (w,v,n,W)$\\
+
+	\hspace{1cm}$for$ $i=0;$ $i<n;$ $i++$\\
+
+	\hspace{2cm}$objetos[i] = cria\_objeto(v[i],w[i],i);$\\
+	
+	\hspace{2cm}$objetos\_selecionados[i] = 0;$\\
+
+	\hspace{1cm}$mochila\_frac2\_rec(objetos, W, 0, n, objetos\_selecionados);$\\
+
+	\hspace{1cm}$return$ $objetos\_selecionados;$\\
+	
+	
+	$mochila\_frac2\_rec(objetos,W,ini,fim, objetos\_selecionados)$\\
+
+	\hspace{1cm}$if$ $ini > fim$\\
+
+	\hspace{2cm}$return;$\\
+	
+
+	\hspace{1cm}$if$ $ini == fim$\\
+
+	\hspace{2cm}$indice = objetos[ini]->indice;$\\
+	
+	\hspace{2cm}$objetos_selecionados[indice] = W;$\\
+	
+	\hspace{2cm}$return;$\\
+	
+	\hspace{1cm}$meio = ini+fim/2$\\
+	
+	\hspace{1cm}$k = kesima\_densidade(objetos, meio);$\\
+	
+	\hspace{1cm}$part\_inv\_densidade(ini,fim,objetos,k);$\\
+	
+	\hspace{1cm}$soma = somar\_peso(objetos,ini,meio);$\\
+	
+	\hspace{1cm}$if$ $soma > W$\\
+	
+	\hspace{2cm}$mochila\_frac2\_rec(objetos,W,ini, meio, objetos\_selecionados);$\\
+	
+	\hspace{1cm}$else$\\
+	
+	\hspace{2cm}$for$ $i=ini;$ $i<meio;$ $i++;$\\
+	
+	\hspace{3cm}$indice = objetos[i]->indice;$\\
+	
+	\hspace{3cm}$peso = objetos[i]->peso;$\\
+	
+	\hspace{3cm}$objetos\_selecionados[indice] = peso;$\\
+	
+	\hspace{2cm}$mochila\_frac2\_rec(objetos,W - soma,meio,fim, objetos\_selecionados)$\\
+	
+	
+	Com o particionamento dos objetos pela mediana do valor por peso, asseguramos que sempre que uma metade é colocada na mochila, esta é a metade de maior valor.\\
+	
+	Achar a mediana, particionar e somar são realizados em $O(n)$.
+Assim, temos a seguinte relação de recorrência:
+
+ \[
+    f(n)\leqslant\left\{
+                \begin{array}{ll}
+                     c,\: n = 1\\
+                  f(\frac{n}{2}) + c'n, \: n>1
+                \end{array}
+              \right.
+    \]            
+  
+           
+   $Pelo\; Teorema\; Mestre:$
+   
+	\hspace{1cm}$a = 1$
+	
+	\hspace{1cm}$b = 2$
+	
+	\hspace{1cm}$k = 1$
+	
+	\hspace{1cm}$a < b^{k}$\\
 
 	
+	\hspace{5cm}$O(n^{k}) = O(n)$
+
+   \subsection*{1.c)}
+   
+   \textbf{Pseudo Código: }\\
+	
+	$struct$ $objeto${\\
+	
+	\hspace{1cm}$int$ $valor;$\\
+	
+	\hspace{1cm}$int$ $peso;$\\
+	
+	\hspace{1cm}$float$ $densidade;$\\
+	
+	\hspace{1cm}$int$ $indice;$\\
+	
+	}
+	
+	$mochila\_frac3(w,v,n,W)$\\
+
+	\hspace{1cm}$for$ $i=0;$ $i<n;$ $i++$\\
+
+	\hspace{2cm}$objetos[i] = cria\_objeto(v[i],w[i],i);$\\
+	
+	\hspace{2cm}$objetos\_selecionados[i] = 0;$\\
+
+	\hspace{1cm}$mochila\_frac3\_rec(objetos, W, 0, n, objetos\_selecionados);$\\
+
+	\hspace{1cm}$return$ $objetos\_selecionados;$\\
+	
+	
+	$mochila\_frac3\_rec(objetos,W,ini,fim, objetos\_selecionados)$\\
+
+	\hspace{1cm}$if$ $ini > fim$\\
+
+	\hspace{2cm}$return;$\\
+	
+
+	\hspace{1cm}$if$ $ini == fim$\\
+
+	\hspace{2cm}$indice = objetos[ini]->indice;$\\
+	
+	\hspace{2cm}$objetos_selecionados[indice] = W;$\\
+	
+	\hspace{2cm}$return;$\\
+	
+	\hspace{1cm}$meio = ini+fim/2$\\
+	
+	\hspace{1cm}$valor_pivot = media_densidade(objetos, ini, fim);$\\
+	
+	\hspace{1cm}$part\_inv\_densidade(ini,fim,objetos,valor_pivot);$\\
+	
+	\hspace{1cm}$soma = somar\_peso(objetos,ini,meio);$\\
+	
+	\hspace{1cm}$if$ $soma > W$\\
+	
+	\hspace{2cm}$mochila\_frac3\_rec(objetos,W,ini, meio, objetos\_selecionados);$\\
+	
+	\hspace{1cm}$else$\\
+	
+	\hspace{2cm}$for$ $i=ini;$ $i<meio;$ $i++;$\\
+	
+	\hspace{3cm}$indice = objetos[i]->indice;$\\
+	
+	\hspace{3cm}$peso = objetos[i]->peso;$\\
+	
+	\hspace{3cm}$objetos\_selecionados[indice] = peso;$\\
+	
+	\hspace{2cm}$mochila\_frac3\_rec(objetos,W - soma,meio,fim, objetos\_selecionados)$\\
+	
+	
+	Agora podemos ter um caso de particionamento desbalanceado, onde sempre um lado tem 1 elemento e o outro tem n-1 elementos. Se todos elementos menos uma fração do último cabem na mochila, todos serão percorridos. Assim, teremos intâncias de $n-1, n-2, ..., 1$, elementos. Portanto a soma de todas as iterações é igual a $\frac{n-1(n-2)}{2}.$
+	
+	\begin{center}
+		$O(\frac{n-1(n-2)}{2}) = O(n^{2})$
+	\end{center}
 
 
 \end{document}
