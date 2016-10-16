@@ -35,17 +35,24 @@ def mochila_frac2(items, capacity):
     return
 
 def mochila_frac2_rec(items, capacity, start, end):
-    # if start > end:
-    #     return
-    # if start == end:
-    #     items[start].selectedWt = capacity
-    #     return
-    if len(items) == 1:
-        items[0].selectedWt = capacity
+    if start > end:
+        return
+    if start == end:
+        items[start].selectedWt = capacity
         return
 
-    middle = len(items)/2
+    middle = (start+end)/2
     middleValueWtIdx = kthValue(items, middle, valueWtExtractor)
+    inverse_partition(items, middleValueWtIdx, valueWtExtractor)
+
+    sumWeight = sum([x.weight for x in items])
+
+    if sumWeight > capacity:
+        mochila_frac2_rec(items, capacity, start, middle)
+    else:
+        for i in xrange(start, middle):
+            items[i].selectedWt = items[i].weight
+        mochila_frac2_rec(items, capacity-sumWeight, middle, end)
 
     return
 
@@ -53,13 +60,35 @@ def mochila_frac3(items, capacity):
     return
         
 
+def mochila_frac3_rec(items, capacity, start, end):
+    if start > end:
+        return
+    if start == end:
+        items[start].selectedWt = capacity
+        return
+
+    middle = (start+end)/2
+    averageValueWt = sum(x.valueWt for x in items)/len(items)
+    inverse_partition_value(items, averageValueWt, valueWtExtractor)
+
+    sumWeight = sum([x.weight for x in items])
+
+    if sumWeight > capacity:
+        mochila_frac3_rec(items, capacity, start, middle)
+    else:
+        for i in xrange(start, middle):
+            items[i].selectedWt = items[i].weight
+        mochila_frac3_rec(items, capacity-sumWeight, middle, end)
+
+    return
+
 def readFile(filename):
     f = open(filename)
     nItems = int(f.readline())
 
     items = []
 
-    for i in range(nItems):
+    for i in xrange(nItems):
         num, value, weight = f.readline().split()
         items.append(Item(int(num), int(value), int(weight), float(value)/float(weight), 0))
 
@@ -93,6 +122,18 @@ def main():
     #     mochila_frac1(items, capacity)
     #     mochila_frac2(items, capacity)
     #     mochila_frac3(items, capacity)
+
+def kthValue(items, k, extractorMethod):
+    #TODO
+    return
+
+def inverse_partition(items, middleValueWtIdx, valueWtExtractor):
+    #TODO
+    return
+
+def inverse_partition_value(items, averageValueWt, valueWtExtractor):
+    #TODO
+    return
 
 def valueWtExtractor(x):
     return x.valueWt
