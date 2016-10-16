@@ -34,6 +34,7 @@ mochila_frac1 (w,v,n,W)
 			sum_peso+=peso;
 		else
 			objetos_selecionados[indice] = W-sum_peso;
+			sum_peso+=W-sum_peso;
 
 	return objetos_selecionados;
 
