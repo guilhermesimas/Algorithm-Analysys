@@ -3,3 +3,4 @@ Mochila-Insts
 *.o
 *.exe
 *.zip
+*.pyc
