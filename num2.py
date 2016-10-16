@@ -125,11 +125,69 @@ def main():
 
 def kthValue(items, k, extractorMethod):
     #TODO
+
+    #calculate medians
+    count=0;
+
+    for i in xrange(len(items)/5)
+        for j in xrange(i,i+5)
+            values[j]=items[j]
+            count++
+
+        values=mergesort(values,valueWtComparison)
+        medians[i]=values[2]
+       
+    if count<n-1
+        for i in xrange(count+1,n)
+            rmn_values[i]=items[i]
+
+        rmn_values=mergesort(rmn_values,valueWtComparison)
+
+        size = len(rmn_values)
+        if size%2 == 0
+            medians[count+1] = (rmn_values[size/2] + rmn_values[(size/2)-1])/2
+
+    pivot = kthValue(medians,n/5,extractorMethod)
+
+    left,right = inverse_partition(items,pivot.num, extractorMethod)
+
+    p = len(left)+1
+
+    if i==p
+        return p
+    if i< p
+        return kthValue(left,k,extractorMethod)
+    if i>p
+        return kthValue(right,k-p,extractorMethod)
+
+
     return
 
 def inverse_partition(items, middleValueWtIdx, valueWtExtractor):
     #TODO
-    return
+
+    p = 0;
+    q = len(items)
+
+    pivot_value = valueWtExtractor(items[middleValueWtIdx])
+    while 1
+        while(valueWtExtractor(items[p]) > pivot_value)
+            p++
+         while(valueWtExtractor(items[]) < pivot_value)
+            q--
+
+        if (p<q)
+            temp = items[p]
+            items[p] = items[q]
+            items[q] = temp
+        else
+            for i in xrange(q)
+                left[i] = items[i]
+
+            for i in xrange(q,len(items))
+                right[i] = items[i] 
+
+    return left,right
 
 def inverse_partition_value(items, averageValueWt, valueWtExtractor):
     #TODO
