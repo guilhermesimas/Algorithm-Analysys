@@ -16,7 +16,7 @@ def degrau_k_frascos(x,n,k):
 	inicio = 0
 	fim = n
 	incremento = pow(raiz_k,k-1)
-	for i in k:
+	for i in range(k):
 		j = inicio
 		while j<fim:
 			if j>=x:
@@ -34,7 +34,8 @@ nNumeros = int(nNumeros)
 n = 2**nBits
 for i in range(0,nNumeros,1):
 	number = int(input(),2)
-	resposta = degrau_2_frascos(number,n)
+	print(str(number))
+	resposta = degrau_k_frascos(number,n,8)
 	if resposta != number:
 		print ("Erro for ",str(number))
 
