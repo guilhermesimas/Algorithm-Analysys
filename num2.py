@@ -31,56 +31,88 @@ def mochila_frac1(items, capacity):
     return
 
 def mochila_frac2(items, capacity):
-    mochila_frac2_rec(items, capacity, 0, len(items))
+    # mochila_frac2_rec(items, capacity, 0, len(items))
+    mochila_frac2_rec(items, capacity)
     return
 
-def mochila_frac2_rec(items, capacity, start, end):
-    if start > end:
-        return
-    if start == end:
-        items[start].selectedWt = capacity
+# def mochila_frac2_rec(items, capacity, start, end):
+#     print(start)
+#     print(end)
+#     print("   ")
+#     # if sum([x.weight for x in items]) < capacity:
+#     #     for i in xrange(len(items)):
+#     #         items[i].selectedWt = items[i].weight
+#     #     return
+#     if start > end:
+#         return
+#     if start == end:
+#         items[start].selectedWt = capacity
+#         return
+
+#     middle = (start+end)/2
+#     medianValueWtItem = kthValue(items, middle, valueWtComparison)
+#     medianValueWtIdx = items.index(medianValueWtItem)
+#     partition(items, medianValueWtIdx, inverse_valueWtComparison)
+
+#     sumWeight = sum([x.weight for x in items[start:middle]]) //se start==middle retorn vazio e entao 0!
+
+#     if sumWeight > capacity:
+#         mochila_frac2_rec(items, capacity, start, middle)
+#     else:
+#         for i in xrange(start, middle):
+#             items[i].selectedWt = items[i].weight
+#         mochila_frac2_rec(items, capacity-sumWeight, middle, end)
+
+#     return
+
+def mochila_frac2_rec(items, capacity):
+    # if sum([x.weight for x in items]) < capacity:
+    #     for i in xrange(len(items)):
+    #         items[i].selectedWt = items[i].weight
+    #     return
+    if len(items) == 1:
+        items[0].selectedWt = capacity
         return
 
-    middle = (start+end)/2
-    middleValueWtIdx = kthValue(items, middle, valueWtExtractor)
-    inverse_partition(items, middleValueWtIdx, valueWtExtractor)
+    middle = len(items)/2
+    medianValueWtItem = kthValue(items, middle, valueWtComparison)
+    medianValueWtIdx = items.index(medianValueWtItem)
+    partition(items, medianValueWtIdx, inverse_valueWtComparison)
 
-    sumWeight = sum([x.weight for x in items])
+    sumWeight = sum([x.weight for x in items[:middle]])
 
     if sumWeight > capacity:
-        mochila_frac2_rec(items, capacity, start, middle)
+        mochila_frac2_rec(items[:middle], capacity)
     else:
-        for i in xrange(start, middle):
+        for i in xrange(middle):
             items[i].selectedWt = items[i].weight
-        mochila_frac2_rec(items, capacity-sumWeight, middle, end)
+        mochila_frac2_rec(items[middle:], capacity-sumWeight)
 
     return
 
 def mochila_frac3(items, capacity):
+    mochila_frac3_rec(items, capacity)
     return
         
-
-def mochila_frac3_rec(items, capacity, start, end):
-    if start > end:
-        return
-    if start == end:
-        items[start].selectedWt = capacity
+def mochila_frac3_rec(items, capacity):
+    if len(items) == 1:
+        items[0].selectedWt = capacity
         return
 
-    middle = (start+end)/2
-    averageValueWt = sum(x.valueWt for x in items)/len(items)
-    inverse_partition_value(items, averageValueWt, valueWtExtractor)
+    averageValueWt = sum(x.valueWt for x in items) / len(items)
+    firstSmallerIndx = inverse_partitionByValue(items, averageValueWt)
 
-    sumWeight = sum([x.weight for x in items])
+    sumWeight = sum([x.weight for x in items[:firstSmallerIndx]])
 
     if sumWeight > capacity:
-        mochila_frac3_rec(items, capacity, start, middle)
+        mochila_frac2_rec(items[:firstSmallerIndx], capacity)
     else:
-        for i in xrange(start, middle):
+        for i in xrange(firstSmallerIndx):
             items[i].selectedWt = items[i].weight
-        mochila_frac3_rec(items, capacity-sumWeight, middle, end)
+        mochila_frac2_rec(items[firstSmallerIndx:], capacity-sumWeight)
 
     return
+
 
 def readFile(filename):
     f = open(filename)
@@ -111,9 +143,7 @@ def main():
 
     if algorithm == 1:
         mochila_frac1(items, capacity)
-        # print([x for x in items if x.selectedWt != 0])
-        # print(sum([x.selectedWt for x in items]))
-        # print(sum([x.weight for x in items]))
+        
     elif algorithm == 2:
         mochila_frac2(items, capacity)
     elif algorithm == 3:
@@ -123,89 +153,112 @@ def main():
     #     mochila_frac2(items, capacity)
     #     mochila_frac3(items, capacity)
 
-def kthValue(items, k, extractorMethod):
-    #TODO
+    print([x for x in items if x.selectedWt != 0])
+    print("selectedWt: {0}".format(sum([x.selectedWt for x in items])))
+    print("totalWt: {0}".format(sum([x.weight for x in items])))
+    print("capacity: {0}".format(capacity))
 
-    #calculate medians
-    count=0;
+def kthValue(items, k, comparisonFunction):
+    if len(items) <= 5:
+        sortedSubArray = mergesort(items,comparisonFunction)
+        return sortedSubArray[k-1]
 
-    for i in xrange(len(items)/5)
-        for j in xrange(i,i+5)
-            values[j]=items[j]
-            count++
+    medians = []
+    for i in xrange(0, len(items), 5):
+        sortedSubArray = mergesort(items[i:i+5],comparisonFunction)
+        medians.append(sortedSubArray[len(sortedSubArray)/2])
 
-        values=mergesort(values,valueWtComparison)
-        medians[i]=values[2]
-       
-    if count<n-1
-        for i in xrange(count+1,n)
-            rmn_values[i]=items[i]
+    pivot = kthValue(medians,len(medians)/2, comparisonFunction)
+    pivotIdx = items.index(pivot)
+    pivotIdx = partition(items, pivotIdx, comparisonFunction)
+    p = pivotIdx+1
 
-        rmn_values=mergesort(rmn_values,valueWtComparison)
+    if k == p:
+        return items[pivotIdx]
+    if k < p:
+        return kthValue(items[0:pivotIdx], k, comparisonFunction)
+    if k > p:
+        return kthValue(items[pivotIdx+1:len(items)], k-p, comparisonFunction)
 
-        size = len(rmn_values)
-        if size%2 == 0
-            medians[count+1] = (rmn_values[size/2] + rmn_values[(size/2)-1])/2
+def intcomparison (a, b):
+    if a == b:
+        return 0
+    if a > b:
+        return 1
+    if a < b:
+        return -1
 
-    pivot = kthValue(medians,n/5,extractorMethod)
+def inverse_intcomparison (a, b):
+    return -1 * intcomparison (a, b)
 
-    left,right = inverse_partition(items,pivot.num, extractorMethod)
+def partition(items, pivotIdx, comparisonFunction):
+    i = 0
 
-    p = len(left)+1
+    pivotObj = items[pivotIdx]
+    items[pivotIdx] = items[len(items)-1]
+    items[len(items)-1] = pivotObj
 
-    if i==p
-        return p
-    if i< p
-        return kthValue(left,k,extractorMethod)
-    if i>p
-        return kthValue(right,k-p,extractorMethod)
+    for j in xrange(len(items)-1):
+        if comparisonFunction(items[j], pivotObj) <= 0:
+            temp = items[i]
+            items[i] = items[j]
+            items[j] = temp
+            i += 1
 
+    temp = items[i]
+    items[i] = pivotObj
+    items[len(items)-1] = temp
 
-    return
+    return i
 
-def inverse_partition(items, middleValueWtIdx, valueWtExtractor):
-    #TODO
+    #     while(comparisonFunction(items[p], pivotObj))
+    #         p++
+    #      while(valueWtExtractor(items[]) < pivot_value)
+    #         q--
 
-    p = 0;
-    q = len(items)
+    #     if (p<q)
+    #         temp = items[p]
+    #         items[p] = items[q]
+    #         items[q] = temp
+    #     else
+    #         for i in xrange(q)
+    #             left[i] = items[i]
 
-    pivot_value = valueWtExtractor(items[middleValueWtIdx])
-    while 1
-        while(valueWtExtractor(items[p]) > pivot_value)
-            p++
-         while(valueWtExtractor(items[]) < pivot_value)
-            q--
+    #         for i in xrange(q,len(items))
+    #             right[i] = items[i] 
 
-        if (p<q)
-            temp = items[p]
-            items[p] = items[q]
-            items[q] = temp
-        else
-            for i in xrange(q)
-                left[i] = items[i]
+    # return left,right
 
-            for i in xrange(q,len(items))
-                right[i] = items[i] 
+def inverse_partitionByValue(items, averageValueWt):
+    i = 0
 
-    return left,right
+    for j in xrange(len(items)-1):
+        if items[j].valueWt > averageValueWt:
+            temp = items[i]
+            items[i] = items[j]
+            items[j] = temp
+            i += 1
 
-def inverse_partition_value(items, averageValueWt, valueWtExtractor):
-    #TODO
-    return
+    return i
 
 def valueWtExtractor(x):
     return x.valueWt
 
 def valueWtComparison(a, b):
-    return a.valueWt < b.valueWt 
+    if a.valueWt == b.valueWt:
+        return 0
+    if a.valueWt > b.valueWt:
+        return 1
+    if a.valueWt < b.valueWt:
+        return -1
 
 def inverse_valueWtComparison(a, b):
-    return not valueWtComparison(a, b)
+    return -1 * valueWtComparison(a, b)
 
 def merge(a,b, comparisonFunction):
     c = []
     while len(a) != 0 and len(b) != 0:
-        if comparisonFunction(a[0], b[0]):
+        if comparisonFunction(a[0], b[0]) <= 0:
             c.append(a[0])
             a.remove(a[0])
         else:
