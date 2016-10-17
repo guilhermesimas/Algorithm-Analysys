@@ -1,62 +1,45 @@
 #!/bin/bash
 # Script para o T1 de Compiladores
-clear
-echo "T1-Compiladores	Guilherme Simas - 1311812"
-echo ""
-echo "Compiling program"
-cd src
-make
-echo "Done"
-echo ""
-echo "--Testing correct cases--"
-cd ..
-for file in input/*.in; do
-	name=`basename $file`
-	name="${name%%.*}"
-	echo "Running for $name"
-	src/out <input/$name.in >output
-	if [ -f gab/error.log ]; then
-		echo "in file $file">>gab/error.log
-	fi
-	diff gab/$name.gab output > /dev/null
-	if [ $? -ne 0 ]; then
-		echo "FAILED, WRONG OUTPUT:"
-		diff gab/$name.gab output
-		break
-	fi
-	echo "SUCCESS"
-	echo ""
-done
-echo "--Testing error cases--"
-for file in input/*.errin; do
-	name=`basename $file`
-	name="${name%%.*}"
-	echo "Running for $name"
-	src/out <input/$name.errin 2>errout >output
-	diff gab/$name.errgab errout > /dev/null
-	if [ $? -ne 0 ]; then
-		echo "FAILED, WRONG ERROR OUTPUT:"
-		diff gab/$name.errgab errout
-		break
-	fi
-	diff gab/$name.gab output > /dev/null
-	if [ $? -ne 0 ]; then
-		echo "FAILED, WRONG OUTPUT:"
-		diff gab/$name.gab output
-		break
-	fi
-	echo "SUCCESS"
-	echo ""
-done
 
-echo "Cleaning up"
-echo "."
-cd src
-make clean
-echo "."
-cd ..
-rm output
-echo "."
-rm errout
-echo "Done"
+rm log.txt
+echo -e "T1-AA\tGuilherme Simas\t1311812" >>log.txt
+echo -e "\tLucas Borges\t1311812" >>log.txt
+echo -e "\tClara Szwarcman\t1311812" >>log.txt
+echo "" >>log.txt
+echo "========= 32 bits ==========">>log.txt
+for file in ../input/bignum_32*; do
+	python3 num1.py $file 1 >>log.txt
+	python3 num1.py $file 2 >>log.txt
+	python3 num1.py $file 4 >>log.txt
+	python3 num1.py $file 8 >>log.txt
+	python3 num1.py $file 16 >>log.txt
+	python3 num1.py $file 32 >>log.txt
+done
+echo "========= 64 bits ==========">>log.txt
+for file in ../input/bignum_64*; do
+	python3 num1.py $file 2 >>log.txt
+	python3 num1.py $file 4 >>log.txt
+	python3 num1.py $file 8 >>log.txt
+	python3 num1.py $file 16 >>log.txt
+	python3 num1.py $file 32 >>log.txt
+done
+echo "========= 128 bits ==========">>log.txt
+for file in ../input/bignum_128*; do
+	python3 num1.py $file 4 >>log.txt
+	python3 num1.py $file 8 >>log.txt
+	python3 num1.py $file 16 >>log.txt
+	python3 num1.py $file 32 >>log.txt
+done
+echo "========= 192 bits ==========">>log.txt
+for file in ../input/bignum_192*; do
+	python3 num1.py $file 8 >>log.txt
+	python3 num1.py $file 16 >>log.txt
+	python3 num1.py $file 32 >>log.txt
+done
+echo "========= 256 bits ==========">>log.txt
+for file in ../input/bignum_256*; do
+	python3 num1.py $file 8 >>log.txt
+	python3 num1.py $file 16 >>log.txt
+	python3 num1.py $file 32 >>log.txt
+done
 
