@@ -3,8 +3,8 @@
 
 rm log.txt
 echo -e "T1-AA\tGuilherme Simas\t1311812" >>log.txt
-echo -e "\tLucas Borges\t1311812" >>log.txt
-echo -e "\tClara Szwarcman\t1311812" >>log.txt
+echo -e "\tLucas Borges\t1311003" >>log.txt
+echo -e "\tClara Szwarcman\t1310351" >>log.txt
 echo "" >>log.txt
 echo "========= 32 bits ==========">>log.txt
 for file in ../input/bignum_32*; do
