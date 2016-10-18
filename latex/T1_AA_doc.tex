@@ -139,6 +139,45 @@ $Degrau\_logn\_frascos(x,n)$\\
 	\hspace{1cm}$busca\_binaria(x,n)$
 	
 	
+
+	\subsection*{Resultados}
+
+	\vspace{0.5cm}	
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			Nome do Arquivo & Degraus & Frascos & cpu time $($ms$)$ \\
+			\hline
+			bignum$\_$32$\_$01 & $2^{32}$ & 1 & 7115744.463ms \\
+			\hline
+			bignum$\_$32$\_$01 & $2^{32}$ & 2 & 194.01299999999998ms \\
+			\hline
+			bignum$\_$32$\_$01 & $2^{32}$ & 4 & 1.7309999999999999ms \\
+			\hline
+			bignum$\_$32$\_$01 & $2^{32}$ & 8 & 0.40499999999999914ms \\
+			\hline
+			bignum$\_$32$\_$01 & $2^{32}$ & 16 & 0.4539999999999995ms \\
+			\hline
+			bignum$\_$32$\_$01 & $2^{32}$ & 32 & 0.7480000000000004ms \\
+			\hline
+			bignum$\_$32$\_$02 & $2^{32}$ & 1 & 5761534.251999999ms \\
+			\hline
+			bignum$\_$32$\_$02 & $2^{32}$ & 2 & 198.36ms \\
+			\hline
+			bignum$\_$32$\_$02 & $2^{32}$ & 4 & 1.7560000000000007ms \\
+			\hline
+			bignum$\_$32$\_$02 & $2^{32}$ & 8 & 0.3969999999999998ms \\
+			\hline
+			bignum$\_$32$\_$02 & $2^{32}$ & 16 & 0.4469999999999995ms \\
+			\hline
+			bignum$\_$32$\_$02 & $2^{32}$ & 32 & 0.7430000000000005ms \\
+			\hline
+			
+		\end{tabular}
+	\end{center}
+	
+	
 	
 	\section*{2. Problema da Mochila Fracionária (pode-se colocar parte de um objeto na mochila)}
 	
@@ -148,7 +187,7 @@ $Degrau\_logn\_frascos(x,n)$\\
 		
 		\vspace{0.5cm}
 	
-	\tab Os objetos são ordenados por seu valor por peso com merge sort. São então adicionados a mochila de um em um começando pelo com maior valor por peso, até a capacidade ser atingida.\\ \\
+	\tab Os objetos são ordenados por seu valor por peso com merge sort. São então adicionados a mochila de um em um começando pelo com maior valor por peso, até a capacidade ser atingida.\\
 	
 	\textbf{Pseudo Código: }\\
 	
@@ -262,7 +301,13 @@ $Degrau\_logn\_frascos(x,n)$\\
 
 	\hspace{2cm}$indice = objetos[ini]->indice;$\\
 	
-	\hspace{2cm}$objetos_selecionados[indice] = W;$\\
+	\hspace{1cm}$if$ $objetos[ini]->peso >= W$\\
+	
+	\hspace{3cm}$objetos_selecionados[indice] = W;$\\
+	
+	\hspace{2cm}$else$\\
+	
+	\hspace{3cm}$objetos_selecionados[indice] =objetos[ini]->peso $\\
 	
 	\hspace{2cm}$return;$\\
 	
@@ -355,11 +400,17 @@ Assim, temos a seguinte relação de recorrência:
 	\hspace{2cm}$return;$\\
 	
 
-	\hspace{1cm}$if$ $ini == fim$\\
+		\hspace{1cm}$if$ $ini == fim$\\
 
 	\hspace{2cm}$indice = objetos[ini]->indice;$\\
 	
-	\hspace{2cm}$objetos_selecionados[indice] = W;$\\
+	\hspace{1cm}$if$ $objetos[ini]->peso >= W$\\
+	
+	\hspace{3cm}$objetos_selecionados[indice] = W;$\\
+	
+	\hspace{2cm}$else$\\
+	
+	\hspace{3cm}$objetos_selecionados[indice] =objetos[ini]->peso $\\
 	
 	\hspace{2cm}$return;$\\
 	
@@ -393,6 +444,130 @@ Assim, temos a seguinte relação de recorrência:
 	\begin{center}
 		$O(\frac{n-1(n-2)}{2}) = O(n^{2})$
 	\end{center}
+	
+	
+	
+	\subsection*{Resultados}
+
+	\vspace{0.5cm}	
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			Nome do Arquivo & Num exec & cpu/Alg 1 & cpu/Alg 2 & cpu/Alg 3 \\
+			\hline
+			m50.in & 10000 &  0.000309375  &  0.00073125 & 0.00008125\\
+			\hline 
+			m58.in & 8621 &    0.0003842362    &    0.0008808433    & 0.00007793469\\
+			\hline 
+			m67.in & 7463 &    0.0004438564    &    0.0009526162    &    0.0001046831\\
+			\hline 
+			m78.in & 6411 &    0.0003436476    &    0.001013882     &    0.000112112\\
+			\hline 
+			m91.in &  5495 &    0.0006596906    &    0.001632166     &    0.0001393312\\
+			\hline 
+			m106.in &  4717 &    0.0007751219    &    0.00190468      &    0.0001192495\\
+			\hline 
+			m124.in &  4033  &    0.0009182061    &    0.002405932     &    0.0001820915\\
+			\hline 
+			m145.in & 3449 &    0.0006886054    &    0.001857422     &    0.0001948028\\
+			\hline 
+			m169.in & 2959  &    0.001378211     &    0.003284471     &    0.000264025\\
+			\hline 
+			m197.in & 2539  &    0.001643117     &    0.003877019     &    0.0002338519\\
+			\hline 
+			m230.in &  2174  &    0.001918986     &    0.004585442     &    0.0003449862\\
+			\hline 
+			m269.in &  1859  &    0.001395239     &    0.003353618     &    0.0003446073\\
+			\hline 
+			m314.in &  1593 &    0.002854284     &    0.006287272     &    0.0004413842\\
+			\hline 
+			m367.in & 1363  &    0.003335932     &    0.007348221     &    0.0004126926\\
+			\hline 
+			m429.in &  1166  &    0.003953152     &    0.008871141     &    0.0006164237\\
+			\hline 
+			m501.in &  999 &    0.002846597     &    0.006475225     &    0.000609985\\
+			\hline 
+			m586.in &  854  &    0.005818208     &    0.01266101      &    0.0008233314\\
+			\hline 
+			m685.in &  730 &    0.006913527     &    0.01502568      &    0.0007491438\\
+			\hline 
+			m801.in & 625 &    0.0081          &    0.01705         &    0.00115\\
+			\hline 
+			m937.in &  534  &    0.005559457     &    0.01331344      &    0.001228933\\
+			\hline 
+			m1096.in & 457  &    0.01182987      &    0.02424097      &    0.001572757\\
+			\hline 
+			m1282.in &  391 &    0.01414642      &    0.02709399      &    0.001478581\\
+			\hline 
+			m1499.in &  334 &    0.01665419      &    0.03424401      &    0.002198728\\
+			\hline 
+			m1753.in &  286 &    0.0111451       &    0.02545892      &    0.002239948\\
+			\hline 
+			m2051.in &  244  &    0.02407787      &    0.04482582      &    0.003009734\\
+			\hline 
+			m2399.in &  209  &    0.02900718      &    0.05554725      &    0.002766148\\
+			\hline 
+			m2806.in &  179  &    0.03421788      &    0.06407123      &    0.004189944\\
+			\hline 
+			m3283.in &  153  &    0.0223652       &    0.04381127      &    0.004289216\\
+			\hline 
+			m3841.in &  131 &    0.0492605       &    0.08277672      &    0.005605916\\
+			\hline 
+			m4493.in &  112  &    0.05929129      &    0.1060268       &    0.005580357\\
+			\hline 
+			m5256.in &  96 &    0.0703125       &    0.1220703       &    0.008463542\\
+			\hline 
+			m6149.in &  82  &    0.04668445      &    0.0929878       &    0.008384146\\
+			\hline 
+			m7194.in & 70  &    0.1008929       &    0.1747768       &    0.01183036\\
+			\hline 
+			m8416.in & 60  &    0.1208333       &    0.2036458       &    0.01041667\\
+			\hline 
+			m9846.in & 51  &    0.1433824       &    0.2352941       &    0.01593137\\
+			\hline 
+			m11519.in &  44  &    0.09019886      &    0.1420455       &    0.01669034\\
+			\hline 
+			m13477.in &  38  &    0.2088816       &    0.3322368       &    0.02179276\\
+			\hline 
+			m15768.in & 32  &    0.2524414       &    0.3867188       &    0.02148438\\
+			\hline 
+			m18448.in & 28  &    0.3024554       &    0.4665179       &    0.03459821\\
+			\hline 
+			m21584.in &  24  &    0.1855469       &    0.4733073       &    0.03515625\\
+			\hline 
+			m25253.in &  20 &    0.440625        &    0.65            &    0.05\\
+			\hline 
+			m29546.in &  17 &    0.5303309       &    0.7702206       & 0.05238971\\
+			\hline 
+			m34568.in & 15 &    0.634375        &    0.8895833       & 0.078125\\
+			\hline 
+			m40444.in &  13 &    0.3858173       &    0.8389423       &    0.07451923\\
+			\hline 
+			m47319.in & 11  &    0.9488636       &    1.227273        &    0.1122159\\
+			\hline 
+			m55363.in & 10  &    1.157812        &    1.45625         &    0.1015625\\
+			\hline 
+			m64774.in & 8  &    1.386719        &    1.730469        &    0.1640625\\
+			\hline 
+			m75785.in & 7  &    0.8415179       &    1.366071        &    0.1495536\\
+			\hline 
+			m88668.in & 6  &    2.125           &    2.416667        &    0.2265625\\
+			\hline 
+			m103741.in & 5  &    2.559375        &    2.828125        &    0.078125\\
+			\hline 
+
+		
+		\end{tabular}
+	\end{center}
+	
+	É possível observar que o terceiro algoritmo é sempre o de menor tempo. Acreditamos que os possíveis motivos para que isso ocorra são:
+	
+	\begin{itemize}
+		\item A função do kesimo e/ou o MergeSort foram implementados de forma ineficiente.
+		\item O pior caso descrito na última questão não ocorre.
+		\item Embora o algoritmo que calcula o kesimo seja linear, a constante pela qual n é multiplicado é muito grande.
+	\end{itemize}
 
 
 \end{document}
