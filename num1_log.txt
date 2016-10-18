@@ -1,0 +1,227 @@
+T1-AA	Guilherme Simas	1311812
+	Lucas Borges	1311812
+	Clara Szwarcman	1311812
+
+========= 32 bits ==========
+===========================================================
+Running for "bignum_32_01.dat"
+DEGRAUS<2^32>	 FRASCOS<1>
+Time reading input <0.030000000000002247ms>
+Total time for algorithm <7115744.463ms>
+Time per iteration <142314.88926ms>
+===========================================================
+Running for "bignum_32_01.dat"
+DEGRAUS<2^32>	 FRASCOS<2>
+Time reading input <0.023999999999999716ms>
+Total time for algorithm <194.01299999999998ms>
+Time per iteration <3.8802599999999994ms>
+===========================================================
+Running for "bignum_32_01.dat"
+DEGRAUS<2^32>	 FRASCOS<4>
+Time reading input <0.025000000000000716ms>
+Total time for algorithm <1.7309999999999999ms>
+Time per iteration <0.03462ms>
+===========================================================
+Running for "bignum_32_01.dat"
+DEGRAUS<2^32>	 FRASCOS<8>
+Time reading input <0.025000000000000716ms>
+Total time for algorithm <0.40499999999999914ms>
+Time per iteration <0.008099999999999982ms>
+===========================================================
+Running for "bignum_32_01.dat"
+DEGRAUS<2^32>	 FRASCOS<16>
+Time reading input <0.023999999999999716ms>
+Total time for algorithm <0.4539999999999995ms>
+Time per iteration <0.00907999999999999ms>
+===========================================================
+Running for "bignum_32_01.dat"
+DEGRAUS<2^32>	 FRASCOS<32>
+Time reading input <0.025000000000000716ms>
+Total time for algorithm <0.7480000000000004ms>
+Time per iteration <0.014960000000000008ms>
+===========================================================
+Running for "bignum_32_02.dat"
+DEGRAUS<2^32>	 FRASCOS<1>
+Time reading input <0.025000000000000716ms>
+Total time for algorithm <5761534.251999999ms>
+Time per iteration <115230.68503999998ms>
+===========================================================
+Running for "bignum_32_02.dat"
+DEGRAUS<2^32>	 FRASCOS<2>
+Time reading input <0.025000000000000716ms>
+Total time for algorithm <198.36ms>
+Time per iteration <3.9672ms>
+===========================================================
+Running for "bignum_32_02.dat"
+DEGRAUS<2^32>	 FRASCOS<4>
+Time reading input <0.025000000000000716ms>
+Total time for algorithm <1.7560000000000007ms>
+Time per iteration <0.03512000000000001ms>
+===========================================================
+Running for "bignum_32_02.dat"
+DEGRAUS<2^32>	 FRASCOS<8>
+Time reading input <0.025000000000000716ms>
+Total time for algorithm <0.3969999999999998ms>
+Time per iteration <0.007939999999999996ms>
+===========================================================
+Running for "bignum_32_02.dat"
+DEGRAUS<2^32>	 FRASCOS<16>
+Time reading input <0.02499999999999898ms>
+Total time for algorithm <0.4469999999999995ms>
+Time per iteration <0.00893999999999999ms>
+===========================================================
+Running for "bignum_32_02.dat"
+DEGRAUS<2^32>	 FRASCOS<32>
+Time reading input <0.02599999999999998ms>
+Total time for algorithm <0.7430000000000005ms>
+Time per iteration <0.01486000000000001ms>
+Running for "bignum_64_01.dat"
+DEGRAUS<2^64>	 FRASCOS<2>
+Time reading input <0.026999999999999247ms>
+Total time for algorithm <13550835.350000001ms>
+Time per iteration <271016.70700000005ms>
+========= 64 bits ==========
+===========================================================
+Running for "bignum_64_01.dat"
+DEGRAUS<2^64>	 FRASCOS<2>
+Time reading input <0.026999999999999247ms>
+Total time for algorithm <13550835.350000001ms>
+Time per iteration <271016.70700000005ms>
+===========================================================
+Running for "bignum_64_01.dat"
+DEGRAUS<2^64>	 FRASCOS<4>
+Time reading input <0.026999999999999247ms>
+Total time for algorithm <409.81199999999995ms>
+Time per iteration <8.19624ms>
+===========================================================
+Running for "bignum_64_01.dat"
+DEGRAUS<2^64>	 FRASCOS<8>
+Time reading input <0.028000000000000247ms>
+Total time for algorithm <3.5249999999999986ms>
+Time per iteration <0.07049999999999997ms>
+===========================================================
+Running for "bignum_64_01.dat"
+DEGRAUS<2^64>	 FRASCOS<16>
+Time reading input <0.02700000000000098ms>
+Total time for algorithm <0.7790000000000001ms>
+Time per iteration <0.015580000000000004ms>
+===========================================================
+Running for "bignum_64_01.dat"
+DEGRAUS<2^64>	 FRASCOS<32>
+Time reading input <0.02700000000000098ms>
+Total time for algorithm <0.8859999999999997ms>
+Time per iteration <0.017719999999999993ms>
+===========================================================
+Running for "bignum_64_02.dat"
+DEGRAUS<2^64>	 FRASCOS<4>
+Time reading input <0.03300000000000178ms>
+Total time for algorithm <429.72499999999997ms>
+Time per iteration <8.5945ms>
+===========================================================
+Running for "bignum_64_02.dat"
+DEGRAUS<2^64>	 FRASCOS<8>
+Time reading input <0.04000000000000184ms>
+Total time for algorithm <4.684999999999998ms>
+Time per iteration <0.09369999999999995ms>
+===========================================================
+Running for "bignum_64_02.dat"
+DEGRAUS<2^64>	 FRASCOS<16>
+Time reading input <0.03199999999999731ms>
+Total time for algorithm <0.9440000000000004ms>
+Time per iteration <0.018880000000000008ms>
+===========================================================
+Running for "bignum_64_02.dat"
+DEGRAUS<2^64>	 FRASCOS<32>
+Time reading input <0.03300000000000178ms>
+Total time for algorithm <1.0919999999999992ms>
+Time per iteration <0.021839999999999984ms>
+========= 64 bits ==========
+===========================================================
+Running for "bignum_128_01.dat"
+DEGRAUS<2^128>	 FRASCOS<8>
+Time reading input <0.04200000000000037ms>
+Total time for algorithm <898.033ms>
+Time per iteration <17.96066ms>
+===========================================================
+Running for "bignum_128_01.dat"
+DEGRAUS<2^128>	 FRASCOS<16>
+Time reading input <0.04099999999999937ms>
+Total time for algorithm <9.008999999999997ms>
+Time per iteration <0.18017999999999992ms>
+===========================================================
+Running for "bignum_128_01.dat"
+DEGRAUS<2^128>	 FRASCOS<32>
+Time reading input <0.04500000000000337ms>
+Total time for algorithm <2.252999999999998ms>
+Time per iteration <0.04505999999999996ms>
+===========================================================
+Running for "bignum_128_02.dat"
+DEGRAUS<2^128>	 FRASCOS<8>
+Time reading input <0.03900000000000084ms>
+Total time for algorithm <896.0749999999999ms>
+Time per iteration <17.921499999999998ms>
+===========================================================
+Running for "bignum_128_02.dat"
+DEGRAUS<2^128>	 FRASCOS<16>
+Time reading input <0.059000000000000025ms>
+Total time for algorithm <9.394ms>
+Time per iteration <0.18788ms>
+===========================================================
+Running for "bignum_128_02.dat"
+DEGRAUS<2^128>	 FRASCOS<32>
+Time reading input <0.04000000000000184ms>
+Total time for algorithm <1.906999999999999ms>
+Time per iteration <0.03813999999999998ms>
+========= 192 bits ==========
+===========================================================
+Running for "bignum_192_01.dat"
+DEGRAUS<2^192>	 FRASCOS<16>
+Time reading input <0.059000000000000025ms>
+Total time for algorithm <125.40499999999999ms>
+Time per iteration <2.5080999999999998ms>
+===========================================================
+Running for "bignum_192_01.dat"
+DEGRAUS<2^192>	 FRASCOS<32>
+Time reading input <0.061000000000002025ms>
+Total time for algorithm <5.802000000000001ms>
+Time per iteration <0.11604000000000003ms>
+===========================================================
+Running for "bignum_192_02.dat"
+DEGRAUS<2^192>	 FRASCOS<16>
+Time reading input <0.060999999999998555ms>
+Total time for algorithm <125.98100000000001ms>
+Time per iteration <2.51962ms>
+===========================================================
+Running for "bignum_192_02.dat"
+DEGRAUS<2^192>	 FRASCOS<32>
+Time reading input <0.07999999999999674ms>
+Total time for algorithm <5.7680000000000025ms>
+Time per iteration <0.11536000000000005ms>
+========= 256 bits ==========
+===========================================================
+Running for "bignum_256_01.dat"
+DEGRAUS<2^256>	 FRASCOS<16>
+Time reading input <0.07099999999999815ms>
+Total time for algorithm <1973.921ms>
+Time per iteration <39.47842ms>
+===========================================================
+Running for "bignum_256_01.dat"
+DEGRAUS<2^256>	 FRASCOS<32>
+Time reading input <0.06700000000000109ms>
+Total time for algorithm <19.016ms>
+Time per iteration <0.38032ms>
+===========================================================
+Running for "bignum_256_02.dat"
+DEGRAUS<2^256>	 FRASCOS<16>
+Time reading input <0.06700000000000109ms>
+Total time for algorithm <1875.7930000000001ms>
+Time per iteration <37.51586ms>
+===========================================================
+Running for "bignum_256_02.dat"
+DEGRAUS<2^256>	 FRASCOS<32>
+Time reading input <0.06800000000000209ms>
+Total time for algorithm <19.178ms>
+Time per iteration <0.38356ms>
+
+
+
