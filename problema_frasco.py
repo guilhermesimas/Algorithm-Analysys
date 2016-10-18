@@ -3,6 +3,8 @@ import time
 import ntpath
 import sys
 
+""" Algoritmo do problema 1.1 """
+
 def degrau_2_frascos (x,n):
 	raiz_n = pow(n,1.0/2)
 	i = 0
@@ -15,8 +17,8 @@ def degrau_2_frascos (x,n):
 				j+=1
 		i += int(raiz_n)
 	return -1
-#Lembrar de mudar para abrir arquivo
 
+""" Algoritmo do problema 1.2 """
 
 def degrau_k_frascos(x,n,k):
 	raiz_k = pow(n,1.0/k)
@@ -38,9 +40,14 @@ def degrau_k_frascos(x,n,k):
 		i+=1
 	return -1
 
+""" Funcao auxiliar para extrair nome de arquivo """
+
 def path_leaf(path):
 	head, tail = ntpath.split(path)
 	return tail or ntpath.basename(head)
+
+""" Main le o arquivo de entrada, extraindo os numeros e rodando 
+o algortimo para cada um, contanto e imprimindo o tempo que demora"""
 
 def main():
 	if len(sys.argv) != 3:
