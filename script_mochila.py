@@ -1,9 +1,18 @@
+#!/usr/bin/env python3
 import os
 import copy
-import num2
+import problema_mochila
 import re
 import time
 import math
+
+""" Script que executa os 3 algoritmos do problema 2 sobre todos os arquivos
+com nome no formato m*.in encontrados na PATH relativa.
+
+Numero de vezes que cada um e executado e uma funcao de N_EXECUTIONS_FACTOR e 
+o numero de items determinado pelo nome do arquivo.
+Alternativamente pode-se definir o proprio dicionario nExecutions (nomes do
+arquivo e chave) """
 
 """ PARAMETROS """
 PATH = "Mochila-Insts\instancias\\"
@@ -34,7 +43,7 @@ for name in filenames:
 print("{0:11} ({4:^7} ) | {1:^16} | {2:^16} | {3:^16}".format("file", "cpu / algo1", "cpu / algo2", "cpu / algo3", "nExec"))
 for name in filenames:
     n = nExecutions[name]
-    items, capacity = num2.readFile(PATH + name)
+    items, capacity = problema_mochila.readFile(PATH + name)
     
 
     """ Tomada de tempo para algoritmo1 """
@@ -46,7 +55,7 @@ for name in filenames:
     # executa algorimo n vezes sobre cada copia dos dados lidos originalmente
     start = time.process_time()
     for i in range(n):
-        num2.mochila_frac1(itemsV[i], capacity)
+        problema_mochila.mochila_frac1(itemsV[i], capacity)
     end = time.process_time()
 
     times[0].append(end - start)
@@ -62,7 +71,7 @@ for name in filenames:
     # executa algorimo n vezes sobre cada copia dos dados lidos originalmente
     start = time.process_time()
     for i in range(n):
-        num2.mochila_frac2(itemsV[i], capacity)
+        problema_mochila.mochila_frac2(itemsV[i], capacity)
     end = time.process_time()
 
     times[1].append(end - start)
@@ -78,7 +87,7 @@ for name in filenames:
     # executa algorimo n vezes sobre cada copia dos dados lidos originalmente
     start = time.process_time()
     for i in range(n):
-        num2.mochila_frac3(itemsV[i], capacity)
+        problema_mochila.mochila_frac3(itemsV[i], capacity)
     end = time.process_time()
 
     times[2].append(end - start)
