@@ -20,7 +20,7 @@ def mochila_frac1(items, capacity):
     sumWeight = 0
     sumValue = 0
 
-    #adiona item a item se cabe na mochila
+    #adiciona item a item se cabe na mochila
     for item in items:
         if sumWeight == capacity:
             return
